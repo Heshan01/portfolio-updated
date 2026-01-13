@@ -47,5 +47,4 @@ If you wish to enable it, follow the official documentation:
 ## 📦 Getting Started
 
 # my-portfolio
-# my-portfolio
-# my-portfolio
+

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import OverlayMenu from "./OverlayMenu";
-import logo from "../assets/logo.png";
 import { FiMenu } from "react-icons/fi";
 
 export default function Navbar() {
@@ -18,16 +17,12 @@ export default function Navbar() {
     const homeSection = document.querySelector("#home");
     if (!homeSection) return;
 
-    // Intersection Observer to detect Home visibility
     const observer = new IntersectionObserver(
       ([entry]) => {
         setForceVisible(entry.isIntersecting);
-        if (entry.isIntersecting) setVisible(true); // always show on Home
+        if (entry.isIntersecting) setVisible(true);
       },
-      {
-        threshold: 0.1,
-        rootMargin: "0px", // expand if needed
-      }
+      { threshold: 0.1, rootMargin: "0px" }
     );
 
     observer.observe(homeSection);
@@ -42,7 +37,6 @@ export default function Navbar() {
   // -------------------------------
   useEffect(() => {
     const handleScroll = () => {
-      // if on Home, force visible
       if (forceVisible) {
         setVisible(true);
         return;
@@ -50,15 +44,10 @@ export default function Navbar() {
 
       const currentScrollY = window.scrollY;
 
-      // scrolling down → hide
       if (currentScrollY > lastScrollY.current) {
         setVisible(false);
-      }
-      // scrolling up → show
-      else {
+      } else {
         setVisible(true);
-
-        // auto-hide after 3 seconds
         if (timerID.current) clearTimeout(timerID.current);
         timerID.current = setTimeout(() => {
           setVisible(false);
@@ -83,7 +72,8 @@ export default function Navbar() {
         }`}
       >
         <div className="flex items-center space-x-2">
-          <img src={logo} alt="Logo" className="w-8 h-8 object-contain" />
+          {/* Changed import to public folder */}
+          <img src="/logo.png" alt="Logo" className="w-8 h-8 object-contain" />
           <div className="text-2xl font-bold text-white hidden sm:block">
             Heshan
           </div>

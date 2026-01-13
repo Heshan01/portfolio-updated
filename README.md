@@ -1,17 +1,49 @@
-# React + Vite
+# 🚀 Heshan Samarasinghe — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is my personal developer portfolio built using **React + Vite**, showcasing my projects, skills, and experience in modern web and mobile development.
 
-Currently, two official plugins are available:
+The site is fast, minimal, and optimized for performance, using Vite’s lightning-fast build system and React’s component-based architecture.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🛠 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** – UI library for building interactive interfaces  
+- **Vite** – Fast development server and bundler with HMR  
+- **JavaScript (ES6+)**  
+- **HTML5 & CSS3**  
+- **ESLint** – Code quality and consistency  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# Heshan
+## ⚡ Features
+
+- 🔥 Fast refresh with Hot Module Replacement (HMR)
+- 📱 Responsive design for mobile & desktop
+- 🎨 Clean and minimal UI
+- 🧩 Component-based architecture
+- 🚀 Optimized build for production
+
+---
+
+## 🔌 Vite React Plugins Used
+
+- **@vitejs/plugin-react**  
+  Uses **Babel** (or **oxc**) for React Fast Refresh
+
+> Alternatively, `@vitejs/plugin-react-swc` can be used for even faster builds using **SWC**.
+
+---
+
+## 🧠 React Compiler
+
+The React Compiler is **not enabled by default** due to its impact on development and build performance.
+
+If you wish to enable it, follow the official documentation:  
+👉 https://react.dev/learn/react-compiler/installation
+
+---
+
+## 📦 Getting Started
+
+# my-portfolio

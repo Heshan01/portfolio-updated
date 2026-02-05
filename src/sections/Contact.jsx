@@ -72,7 +72,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="w-full min-h-screen relative bg-black overflow-hidden text-white py-20 px-6 md:px-20 flex flex-col md:flex-row items-center gap-10"
+      className="w-full min-h-screen relative bg-black overflow-x-hidden text-white py-20 px-6 md:px-20 flex flex-col md:flex-row items-center gap-10"
     >
       <ParticlesBackground />
 
@@ -130,9 +130,8 @@ export default function Contact() {
                 placeholder="Your Name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.name ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                className={`p-3 rounded-md bg-white/10 border ${errors.name ? "border-red-500" : "border-gray-500"
+                  } text-white focus:outline-none focus:border-blue-500`}
               />
 
               {errors.name && (
@@ -152,9 +151,8 @@ export default function Contact() {
                 placeholder="example@mail.com"
                 value={formData.email}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.email ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                className={`p-3 rounded-md bg-white/10 border ${errors.email ? "border-red-500" : "border-gray-500"
+                  } text-white focus:outline-none focus:border-blue-500`}
               />
 
               {errors.email && (
@@ -174,9 +172,8 @@ export default function Contact() {
                 placeholder="Write your message..."
                 value={formData.message}
                 onChange={handleChange}
-                className={`p-3 rounded-md bg-white/10 border ${
-                  errors.message ? "border-red-500" : "border-gray-500"
-                } text-white focus:outline-none focus:border-blue-500`}
+                className={`p-3 rounded-md bg-white/10 border ${errors.message ? "border-red-500" : "border-gray-500"
+                  } text-white focus:outline-none focus:border-blue-500`}
               ></textarea>
 
               {errors.message && (

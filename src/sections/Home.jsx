@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import ParticlesBackground from "../components/ParticlesBackground";
 import { motion } from "framer-motion";
 import React from "react";
@@ -36,11 +36,11 @@ export default function Home() {
     []
   );
 
-  const [index, setIndex] = React.useState(0);
-  const [subIndex, setSubIndex] = React.useState(0);
-  const [deleting, setDeleting] = React.useState(false);
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const current = roles[index];
     const timeout = setTimeout(() => {
       if (!deleting && subIndex < current.length) setSubIndex((v) => v + 1);
@@ -57,23 +57,23 @@ export default function Home() {
   }, [subIndex, index, deleting, roles]);
 
   return (
-    <section id="home" className="w-full h-screen relative bg-black overflow-hidden z-0">
+    <section id="home" className="w-full min-h-screen relative bg-black overflow-x-hidden z-0 flex items-center justify-center py-20 px-4 md:px-10">
       {/* PARTICLES */}
       <ParticlesBackground className="absolute inset-0 -z-10" />
 
       {/* GRADIENT BACKGROUNDS */}
-      <div className="absolute inset-0">
-        <div className="absolute -top-32 -left-32 w-[70vw] sm:w-[50vw] md:w-[40vw] h-[70vw] sm:h-[50vw] md:h-[40vw] max-w-[500px] max-h-[500px] rounded-full bg-gradient-to-tr from-[#302b63] via-[#00bf2f] to-[#1cd8d2] opacity-30 sm:opacity-20 md:opacity-10 blur-[100px] sm:blur-[130px] md:blur-[200px] animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-[70vw] sm:w-[50vw] md:w-[40vw] h-[70vw] sm:h-[50vw] md:h-[40vw] max-w-[500px] max-h-[500px] rounded-full bg-gradient-to-tr from-[#302b63] via-[#00bf2f] to-[#1cd8d2] opacity-30 sm:opacity-20 md:opacity-10 blur-[100px] sm:blur-[130px] md:blur-[200px] animate-pulse delay-500"></div>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-32 -left-32 w-[70vw] sm:w-[50vw] md:w-[40vw] h-[70vw] sm:h-[50vw] md:h-[40vw] max-w-[500px] max-h-[500px] rounded-full bg-gradient-to-tr from-[#302b63] via-[#00bf2f] to-[#1cd8d2] opacity-20 blur-[100px] animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-[70vw] sm:w-[50vw] md:w-[40vw] h-[70vw] sm:h-[50vw] md:h-[40vw] max-w-[500px] max-h-[500px] rounded-full bg-gradient-to-tr from-[#302b63] via-[#00bf2f] to-[#1cd8d2] opacity-20 blur-[100px] animate-pulse delay-500"></div>
       </div>
 
-      {/* TEXT CONTENT */}
-      <div className="relative z-10 h-full w-full max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2">
-        <div className="flex flex-col justify-center h-full text-center lg:text-left relative">
-          <div className="w-full lg:pr-24 mx-auto max-w-[48rem]">
+      <div className="relative z-10 w-full max-w-7xl flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20">
+        {/* TEXT CONTENT */}
+        <div className="flex-1 flex flex-col justify-center text-center lg:text-left order-2 lg:order-1">
+          <div className="max-w-[48rem]">
             {/* TYPING TEXT */}
             <motion.div
-              className="mb-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white tracking-wide min-h-[1.6em]"
+              className="mb-3 text-xl sm:text-2xl md:text-3xl font-semibold text-white tracking-wide min-h-[1.6em]"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -84,25 +84,25 @@ export default function Home() {
 
             {/* My NAME */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] drop-shadow-lg"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] drop-shadow-lg leading-tight"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               Hello, I'm <br />
-              <span className="text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl lg:whitespace-nowrap">
+              <span className="text-white font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl">
                 Heshan Dilhara
               </span>
             </motion.h1>
 
             {/* DESCRIPTION */}
             <motion.p
-              className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0"
+              className="mt-6 text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              As a student focusing on DevOps and Infrastructure as Code (IaC), I am passionate about building, deploying, and managing scalable applications in the cloud. I specialize in leveraging tools like Docker, Kubernetes, and Ansible to create efficient, resilient, and repeatable environments.
+              As a student focusing on DevOps and Infrastructure as Code (IaC), I am passionate about building, deploying, and managing scalable applications in the cloud. I specialize in leveraging tools like Docker, Kubernetes, and Ansible.
             </motion.p>
 
             {/* BUTTONS */}
@@ -114,20 +114,20 @@ export default function Home() {
             >
               <a
                 href="#projects"
-                className="px-6 py-3 rounded-full font-medium text-lg text-white bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] shadow-lg hover:scale-105 transition-all"
+                className="px-8 py-3 rounded-full font-semibold text-lg text-white bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] shadow-lg hover:scale-105 hover:brightness-110 transition-all"
               >
                 View My Works
               </a>
               <a
                 href="/Heshan_Dilhara_Profile.pdf"
-                className="px-6 py-3 rounded-full font-medium text-lg text-white border border-white hover:bg-white hover:text-black transition-all"
+                className="px-8 py-3 rounded-full font-semibold text-lg text-white border-2 border-white hover:bg-white hover:text-black transition-all"
               >
                 My Resume
               </a>
             </motion.div>
 
             {/* SOCIAL ICONS */}
-            <div className="mt-8 flex gap-5 text-2xl md:text-3xl justify-center lg:justify-start">
+            <div className="mt-8 flex gap-6 text-2xl md:text-3xl justify-center lg:justify-start">
               {social.map(({ Icon, label, link }) => (
                 <motion.a
                   href={link}
@@ -139,38 +139,37 @@ export default function Home() {
                   initial="initial"
                   whileHover="hover"
                   whileTap="tap"
-                  className="text-gray-300"
+                  className="text-gray-400 hover:text-[#1cd8d2] transition-colors"
                 >
                   <Icon />
                 </motion.a>
               ))}
             </div>
-
           </div>
         </div>
 
-        <div className="relative hidden lg:block">
+        {/* AVATAR IMAGE */}
+        <div className="hidden lg:flex flex-1 justify-center lg:justify-end order-1 lg:order-2 relative group mt-10 lg:mt-0">
           <div
-          className="absolute top-1/2 -translate-y-1/2 pointer-events-none"
-          style={{ 
-          right: "10px", width: "min(22vw, 410px)", height: "min(40vh, 760px )", borderRadius: "50%",
-          filter: "blur(38px)", opacity:0.32, 
-          background: "conic-gradient(from 0deg, #1cd8d2, #00bf8f, #302b63, #1cd8d2)",
-          }}
-          
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            style={{
+              width: "min(40vw, 500px)", height: "min(40vw, 500px)", borderRadius: "50%",
+              filter: "blur(60px)", opacity: 0.3,
+              background: "conic-gradient(from 0deg, #1cd8d2, #00bf8f, #302b63, #1cd8d2)",
+            }}
           />
-          <motion.img src={avator} alt="Heshan Dilhara"
-          className="absolute top-1/2 -translate-y-1/2 object-contain select-none pointer-events-none"
-          style={{
-            right : "-150px", width: "min(45vw, 780px)", maxHeight:"90vh"
-          }}
-
-          initial={{ opacity: 0, y: 40, scale: 0.8 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-          
-          
-          />
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <img
+              src={avator}
+              alt="Heshan Dilhara"
+              className="w-[280px] sm:w-[350px] md:w-[450px] lg:w-[500px] xl:w-[600px] h-auto object-contain select-none drop-shadow-2xl"
+            />
+          </motion.div>
         </div>
       </div>
     </section>

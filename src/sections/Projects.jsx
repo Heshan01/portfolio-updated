@@ -26,8 +26,8 @@ const projects = [
     title: "Ceylon Journey",
     description: "Travaling website with vite, MongoDB, and React.",
     tech: ["vite", "MongoDB", "React"],
-    github: "https://github.com/Heshan01/ceylon-navigator",
-    live: "https://ceylon-navigator.vercel.app/",
+    github: "https://github.com/Heshan01/ceylon-journey",
+    live: "https://ceylonjourney.vercel.app/",
     img: img2,
   },
   {
@@ -84,7 +84,7 @@ export default function ProjectsPage() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-          {projects.map((project, i) => (
+          {projects.slice(0, 3).map((project, i) => (
             <motion.div
               key={i}
               className="relative bg-[#111] rounded-2xl border border-white/10 overflow-hidden group flex flex-col"

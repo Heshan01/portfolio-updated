@@ -2,7 +2,7 @@ import { FaLinkedin, FaGithub, FaFacebook } from "react-icons/fa6";
 
 export default function Footer() {
   return (
-    <footer className="w-full py-20 bg-black relative overflow-hidden">
+    <footer className="w-full py-20 bg-black relative overflow-x-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 via-green-900/20 to-purple-900/30 blur-[120px] animate-pulse opacity-60"></div>
 
       <div className="relative z-10 flex flex-col items-center text-center text-white">

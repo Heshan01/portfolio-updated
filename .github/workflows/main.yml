@@ -2,7 +2,8 @@ name: Deploy Vite Site to GitHub Pages
 
 on:
   push:
-    branches: ["main"] 
+    branches: ["main"]
+
   workflow_dispatch:
 
 permissions:
@@ -21,7 +22,7 @@ jobs:
       url: ${{ steps: deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      name: Checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Node
@@ -42,7 +43,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Vite එකෙන් build වෙද්දී හැදෙන ෆෝල්ඩර් එක
+          path: './dist'
 
       - name: Deploy to GitHub Pages
         id: deployment

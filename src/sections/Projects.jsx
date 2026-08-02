@@ -1,12 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import img1 from "../assets/img1.png";
+//import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.JPG";
 import img3 from "../assets/img3.JPG";
 import img4 from "../assets/img4.JPG";
 import img5 from "../assets/img5.JPG";
 import img6 from "../assets/img6.JPG";
+import surfora from "../assets/surfora.jpg"
 
 const glows = [
   "-top-10 -left-10 w-72 h-72 opacity-20 blur-[80px]",
@@ -15,12 +16,18 @@ const glows = [
 
 const projects = [
   {
-    title: "Portfolio Website",
-    description: "Modern portfolio built with React, Tailwind, and Framer Motion.",
-    tech: ["React", "Tailwind", "Framer Motion"],
-    github: "#",
-    live: "#",
-    img: img1,
+    title: "Surfora App",
+    description: "A lightweight native Android web browser inspired by Safari's clean design, featuring a bottom address bar, visual tab management, private browsing, bookmarks, history, and safe browsing features.",
+    tech: [
+      "Android",
+      "Kotlin",
+      "Jetpack Compose",
+      "WebView",
+      "Material Design"
+    ],
+    github: "https://github.com/Heshan01/Surfora-Web-Browser-Mobile-app",
+    live: "https://surforapp.vercel.app/",
+    img: surfora,
   },
   {
     title: "Tea Leaf System",

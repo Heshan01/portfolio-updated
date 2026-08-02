@@ -1,13 +1,12 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-//import img1 from "../assets/img1.png";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import img2 from "../assets/img2.JPG";
 import img3 from "../assets/img3.JPG";
-import img4 from "../assets/img4.JPG";
-import img5 from "../assets/img5.JPG";
-import img6 from "../assets/img6.JPG";
 import surfora from "../assets/surfora.jpg"
+import Quickshift from "../assets/Quickshift.jpg"
+import GemStone from "../assets/GemStone.jpg"
+import Aura from "../assets/Aura.jpg"
 
 const glows = [
   "-top-10 -left-10 w-72 h-72 opacity-20 blur-[80px]",
@@ -46,34 +45,68 @@ const projects = [
     img: img3,
   },
   {
-    title: "Blog Platform",
-    description: "CMS platform for creating and sharing blogs.",
-    tech: ["Next.js", "Tailwind", "Sanity.io"],
-    github: "#",
-    live: "#",
-    img: img4,
+    title: "QuickShift",
+    description: "Hourly & part-time job marketplace connecting shift seekers and job posters across Sri Lanka.",
+    tech: ["React", "TypeScript", "Firebase", "Tailwind CSS", "Gemini API"],
+    github: "https://github.com/Heshan01/QuickShift-Web-Version-2",
+    live: "https://quickshiftsigma.vercel.app/",
+    img: Quickshift,
   },
   {
-    title: "Task Manager",
-    description: "Task management app with Firebase and real-time updates.",
-    tech: ["React", "Firebase", "Tailwind"],
-    github: "#",
-    live: "#",
-    img: img5,
+    title: "GemStone",
+    description: "Real-time gem trading marketplace for Sri Lanka's Ratnapura community, with verified sellers and in-app chat.",
+    tech: ["React", "TypeScript", "Firebase", "Tailwind CSS", "Docker"],
+    github: "https://github.com/Heshan01/GemStone",
+    live: "https://gemstonerv.vercel.app/",
+    img: GemStone,
   },
   {
-    title: "Weather App",
-    description: "Beautiful weather app showing real-time data.",
-    tech: ["React", "API", "Tailwind"],
-    github: "#",
-    live: "#",
-    img: img6,
+    title: "Aura SoundWave",
+    description: "Apple Music–styled Android MP3 player with a glassmorphism UI, 10-band equalizer, and persistent playlists.",
+    tech: ["Kotlin", "Jetpack Compose", "Media3 (ExoPlayer)", "Room"],
+    github: "https://github.com/Heshan01/Aura-SoundWave",
+    live: "https://aurasoundwave.vercel.app/",
+    img: Aura,
   },
 ];
 
+function useWindowSize() {
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== "undefined" ? window.innerWidth : 1200,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({ width: window.innerWidth });
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowSize;
+}
+
 export default function ProjectsPage() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const { width } = useWindowSize();
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % projects.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
+  };
+
+  const getOffset = () => {
+    if (width >= 1024) return 180;
+    if (width >= 640) return 120;
+    return 70;
+  };
+  const xOffset = getOffset();
+
   return (
-    <section id="projects" className="w-full min-h-screen relative bg-black text-white overflow-x-hidden py-16">
+    <section id="projects" className="w-full min-h-screen relative bg-black text-white overflow-hidden py-24">
       {/* Background Glows */}
       <div className="absolute inset-0 pointer-events-none">
         {glows.map((c, i) => (
@@ -84,83 +117,148 @@ export default function ProjectsPage() {
         ))}
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6">
-        <h2 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] mb-12 text-center">
+      <div className="relative max-w-7xl mx-auto px-4 flex flex-col items-center">
+        <h2 className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] mb-16 text-center">
           My Projects
         </h2>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-          {projects.slice(0, 3).map((project, i) => (
-            <motion.div
-              key={i}
-              className="relative bg-[#111] rounded-2xl border border-white/10 overflow-hidden group flex flex-col"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              {/* Project Image */}
-              <div className="overflow-hidden rounded-t-2xl">
+        {/* Carousel Container */}
+        <div
+          className="relative w-full max-w-6xl h-[250px] sm:h-[400px] lg:h-[450px] flex justify-center items-center mb-16"
+          style={{ perspective: "1000px" }}
+        >
+          {projects.map((project, index) => {
+            const total = projects.length;
+            let diff = index - currentIndex;
+
+            // Adjust for circular array
+            if (diff > total / 2) diff -= total;
+            if (diff < -total / 2) diff += total;
+
+            const isActive = diff === 0;
+            const isVisible = Math.abs(diff) <= 2;
+            const zIndex = 20 - Math.abs(diff);
+
+            return (
+              <motion.div
+                key={index}
+                className={`absolute w-[240px] sm:w-[500px] lg:w-[650px] aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 ${isActive ? 'shadow-[0_0_40px_rgba(28,216,210,0.3)] border-[#1cd8d2]/50' : ''}`}
+                onClick={() => {
+                  if (!isActive) setCurrentIndex(index);
+                }}
+                initial={false}
+                animate={{
+                  opacity: isVisible ? (1 - Math.abs(diff) * 0.3) : 0,
+                  scale: isVisible ? (1 - Math.abs(diff) * 0.15) : 0.6,
+                  x: isVisible ? diff * xOffset : (diff > 0 ? 400 : -400),
+                  rotateY: diff * -10, // Slight rotation for 3D feel
+                  zIndex,
+                }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} // smooth spring-like easing
+                style={{
+                  pointerEvents: isVisible ? "auto" : "none",
+                }}
+                drag={isActive ? "x" : false}
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={isActive ? (e, info) => {
+                  if (info.offset.x < -50) handleNext();
+                  else if (info.offset.x > 50) handlePrev();
+                } : undefined}
+              >
                 <img
                   src={project.img}
                   alt={project.title}
-                  className="w-full h-48 sm:h-56 md:h-64 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover pointer-events-none"
                 />
+                {!isActive && (
+                  <div className="absolute inset-0 bg-black/60 transition-opacity duration-300 pointer-events-none" />
+                )}
+
+                {/* Active state overlay for gradient feel */}
+                {isActive && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                )}
+              </motion.div>
+            );
+          })}
+
+          {/* Navigation Arrows */}
+          <button
+            onClick={handlePrev}
+            className="absolute left-2 sm:left-10 z-30 p-3 sm:p-4 rounded-full bg-black/50 hover:bg-white/10 border border-white/20 backdrop-blur-md text-white transition-all hover:scale-110"
+          >
+            <FaChevronLeft className="text-xl sm:text-2xl" />
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute right-2 sm:right-10 z-30 p-3 sm:p-4 rounded-full bg-black/50 hover:bg-white/10 border border-white/20 backdrop-blur-md text-white transition-all hover:scale-110"
+          >
+            <FaChevronRight className="text-xl sm:text-2xl" />
+          </button>
+        </div>
+
+        {/* Project Details */}
+        <div className="w-full max-w-4xl h-[300px] sm:h-[220px] relative mt-4">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 flex flex-col items-center text-center"
+            >
+              <h3 className="text-3xl font-bold mb-4">{projects[currentIndex].title}</h3>
+              <p className="text-white/70 mb-6 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto px-4">
+                {projects[currentIndex].description}
+              </p>
+
+              <div className="flex flex-wrap justify-center gap-2 mb-8 px-4">
+                {projects[currentIndex].tech.map((tech, idx) => (
+                  <span
+                    key={idx}
+                    className="text-xs sm:text-sm bg-[#111] border border-white/20 text-white hover:border-[#1cd8d2] transition-colors px-4 py-1.5 rounded-full font-medium shadow-sm"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
 
-              {/* Glow Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#1cd8d2]/30 via-[#00bf8f]/20 to-[#302b63]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl rounded-2xl pointer-events-none"></div>
-
-              {/* Content */}
-              <div className="p-6 flex flex-col flex-1">
-                <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-white/80 mb-4">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="text-xs bg-gradient-to-r text-white border border-white hover:bg-white hover:text-black transition-all px-2 py-1 rounded-full font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex gap-4 mt-auto text-xl text-[#1cd8d2]">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:scale-125 transition-transform duration-300"
-                  >
-                    <FaGithub />
-                  </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:scale-125 transition-transform duration-300"
-                  >
-                    <FaExternalLinkAlt />
-                  </a>
-                </div>
+              <div className="flex gap-4 sm:gap-6 mt-auto">
+                <a
+                  href={projects[currentIndex].github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white text-black font-semibold hover:bg-gray-200 transition-colors"
+                >
+                  <FaGithub className="text-lg" />
+                  GitHub
+                </a>
+                <a
+                  href={projects[currentIndex].live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-transparent border-2 border-[#1cd8d2] text-[#1cd8d2] font-semibold hover:bg-[#1cd8d2] hover:text-black transition-colors"
+                >
+                  <FaExternalLinkAlt className="text-lg" />
+                  Live Demo
+                </a>
               </div>
             </motion.div>
-          ))}
+          </AnimatePresence>
+        </div>
 
-          {/* View All Projects Button */}
-          <div className="col-span-full flex justify-center mt-12">
-            <a
-              href="https://github.com/Heshan01?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block px-10 py-4 font-semibold text-lg rounded-xl bg-gradient-to-r border bg-white text-black border-white hover:bg-white hover:text-black transition-all"
-            >
-              View All Projects
-            </a>
-          </div>
+        {/* View All Projects */}
+        <div className="mt-16 z-10">
+          <a
+            href="https://github.com/Heshan01?tab=repositories"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-8 py-3 text-sm font-semibold text-white/50 hover:text-white border-b border-transparent hover:border-white transition-all"
+          >
+            View More on GitHub &rarr;
+          </a>
         </div>
       </div>
     </section>

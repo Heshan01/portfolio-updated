@@ -101,7 +101,7 @@ export default function ProjectsPage() {
   const getOffset = () => {
     if (width >= 1024) return 180;
     if (width >= 640) return 120;
-    return 70;
+    return 90;
   };
   const xOffset = getOffset();
 
@@ -124,7 +124,7 @@ export default function ProjectsPage() {
 
         {/* Carousel Container */}
         <div
-          className="relative w-full max-w-6xl h-[250px] sm:h-[400px] lg:h-[450px] flex justify-center items-center mb-16"
+          className="relative w-full max-w-6xl h-[180px] sm:h-[400px] lg:h-[450px] flex justify-center items-center mb-2 sm:mb-16"
           style={{ perspective: "1000px" }}
         >
           {projects.map((project, index) => {
@@ -142,7 +142,7 @@ export default function ProjectsPage() {
             return (
               <motion.div
                 key={index}
-                className={`absolute w-[240px] sm:w-[500px] lg:w-[650px] aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 ${isActive ? 'shadow-[0_0_40px_rgba(28,216,210,0.3)] border-[#1cd8d2]/50' : ''}`}
+                className={`absolute w-[280px] sm:w-[500px] lg:w-[650px] aspect-video rounded-2xl overflow-hidden cursor-pointer border border-white/10 ${isActive ? 'shadow-[0_0_40px_rgba(28,216,210,0.3)] border-[#1cd8d2]/50' : ''}`}
                 onClick={() => {
                   if (!isActive) setCurrentIndex(index);
                 }}
@@ -186,20 +186,20 @@ export default function ProjectsPage() {
           {/* Navigation Arrows */}
           <button
             onClick={handlePrev}
-            className="absolute left-2 sm:left-10 z-30 p-3 sm:p-4 rounded-full bg-black/50 hover:bg-white/10 border border-white/20 backdrop-blur-md text-white transition-all hover:scale-110"
+            className="absolute left-1 sm:left-10 z-30 p-2.5 sm:p-4 rounded-full bg-black/50 hover:bg-white/10 border border-white/20 backdrop-blur-md text-white transition-all hover:scale-110"
           >
-            <FaChevronLeft className="text-xl sm:text-2xl" />
+            <FaChevronLeft className="text-lg sm:text-2xl" />
           </button>
           <button
             onClick={handleNext}
-            className="absolute right-2 sm:right-10 z-30 p-3 sm:p-4 rounded-full bg-black/50 hover:bg-white/10 border border-white/20 backdrop-blur-md text-white transition-all hover:scale-110"
+            className="absolute right-1 sm:right-10 z-30 p-2.5 sm:p-4 rounded-full bg-black/50 hover:bg-white/10 border border-white/20 backdrop-blur-md text-white transition-all hover:scale-110"
           >
-            <FaChevronRight className="text-xl sm:text-2xl" />
+            <FaChevronRight className="text-lg sm:text-2xl" />
           </button>
         </div>
 
         {/* Project Details */}
-        <div className="w-full max-w-4xl h-[300px] sm:h-[220px] relative mt-4">
+        <div className="w-full max-w-4xl h-[280px] lg:h-[220px] relative mt-2 sm:mt-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -209,28 +209,28 @@ export default function ProjectsPage() {
               transition={{ duration: 0.3 }}
               className="absolute inset-0 flex flex-col items-center text-center"
             >
-              <h3 className="text-3xl font-bold mb-4">{projects[currentIndex].title}</h3>
-              <p className="text-white/70 mb-6 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto px-4">
+              <h3 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">{projects[currentIndex].title}</h3>
+              <p className="text-white/70 mb-4 sm:mb-6 text-xs sm:text-base leading-relaxed max-w-2xl mx-auto px-4 sm:px-8">
                 {projects[currentIndex].description}
               </p>
 
-              <div className="flex flex-wrap justify-center gap-2 mb-8 px-4">
+              <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-8 px-2 sm:px-4">
                 {projects[currentIndex].tech.map((tech, idx) => (
                   <span
                     key={idx}
-                    className="text-xs sm:text-sm bg-[#111] border border-white/20 text-white hover:border-[#1cd8d2] transition-colors px-4 py-1.5 rounded-full font-medium shadow-sm"
+                    className="text-[10.5px] sm:text-sm bg-[#111] border border-white/20 text-white hover:border-[#1cd8d2] transition-colors px-3 sm:px-4 py-1 sm:py-1.5 rounded-full font-medium shadow-sm"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
 
-              <div className="flex gap-4 sm:gap-6 mt-auto">
+              <div className="flex gap-3 sm:gap-6 mt-4 sm:mt-auto">
                 <a
                   href={projects[currentIndex].github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-white text-black font-semibold hover:bg-gray-200 transition-colors"
+                  className="flex items-center gap-2 px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl bg-white text-black text-sm sm:text-base font-semibold hover:bg-gray-200 transition-colors"
                 >
                   <FaGithub className="text-lg" />
                   GitHub
@@ -239,7 +239,7 @@ export default function ProjectsPage() {
                   href={projects[currentIndex].live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-transparent border-2 border-[#1cd8d2] text-[#1cd8d2] font-semibold hover:bg-[#1cd8d2] hover:text-black transition-colors"
+                  className="flex items-center gap-2 px-5 sm:px-6 py-2 sm:py-2.5 rounded-xl bg-transparent border-2 border-[#1cd8d2] text-[#1cd8d2] text-sm sm:text-base font-semibold hover:bg-[#1cd8d2] hover:text-black transition-colors"
                 >
                   <FaExternalLinkAlt className="text-lg" />
                   Live Demo
@@ -250,7 +250,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* View All Projects */}
-        <div className="mt-16 z-10">
+        <div className="mt-4 sm:mt-16 z-10">
           <a
             href="https://github.com/Heshan01?tab=repositories"
             target="_blank"

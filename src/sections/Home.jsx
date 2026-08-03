@@ -73,7 +73,7 @@ export default function Home() {
           <div className="max-w-[48rem]">
             {/* TYPING TEXT */}
             <motion.div
-              className="mb-3 text-xl sm:text-2xl md:text-3xl font-semibold text-white tracking-wide min-h-[1.6em]"
+              className="mb-3 text-base sm:text-lg md:text-xl font-semibold text-white tracking-wide min-h-[1.6em]"
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -84,7 +84,7 @@ export default function Home() {
 
             {/* My NAME */}
             <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] drop-shadow-lg leading-tight"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#1cd8d2] via-[#00bf8f] to-[#302b63] drop-shadow-lg leading-tight"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -149,27 +149,56 @@ export default function Home() {
         </div>
 
         {/* AVATAR IMAGE */}
-        <div className="hidden lg:flex flex-1 justify-center lg:justify-end order-1 lg:order-2 relative group mt-10 lg:mt-0">
-          <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-            style={{
-              width: "min(40vw, 500px)", height: "min(40vw, 500px)", borderRadius: "50%",
-              filter: "blur(60px)", opacity: 0.3,
-              background: "conic-gradient(from 0deg, #1cd8d2, #00bf8f, #302b63, #1cd8d2)",
-            }}
-          />
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <img
-              src={avator}
-              alt="Heshan Dilhara"
-              className="w-[280px] sm:w-[350px] md:w-[450px] lg:w-[500px] xl:w-[600px] h-auto object-contain select-none drop-shadow-2xl"
+        <div className="hidden lg:flex flex-1 justify-center lg:justify-end items-center order-1 lg:order-2 relative group mt-10 lg:mt-0">
+          
+          <div className="relative flex justify-center items-center w-[160px] sm:w-[220px] md:w-[290px] lg:w-[350px] xl:w-[410px] aspect-square">
+            
+            {/* Animated Solid Blob */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-tr from-[#00bf8f] to-[#1cd8d2] z-0 pointer-events-none shadow-[0_0_40px_rgba(28,216,210,0.3)]"
+              animate={{
+                borderRadius: [
+                  "64% 36% 27% 73% / 55% 42% 58% 45%",
+                  "41% 59% 36% 64% / 46% 54% 46% 54%",
+                  "73% 27% 41% 59% / 48% 62% 38% 52%",
+                  "64% 36% 27% 73% / 55% 42% 58% 45%"
+                ]
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
             />
-          </motion.div>
+
+            {/* Animated Outline Blob */}
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[112%] h-[112%] border-[2px] border-[#1cd8d2]/70 z-0 pointer-events-none"
+              animate={{
+                borderRadius: [
+                  "51% 49% 37% 63% / 47% 41% 59% 53%",
+                  "65% 35% 26% 74% / 57% 55% 45% 43%",
+                  "40% 60% 50% 50% / 50% 40% 60% 50%",
+                  "51% 49% 37% 63% / 47% 41% 59% 53%"
+                ]
+              }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            />
+
+            {/* Avatar Image Popping Out */}
+            <motion.div
+              className="absolute bottom-0 z-10 w-[95%] h-[110%] flex justify-center items-end"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            >
+              <img
+                src={avator}
+                alt="Heshan Dilhara"
+                className="w-full h-full object-contain object-bottom select-none drop-shadow-2xl"
+                style={{
+                  WebkitMaskImage: "linear-gradient(to bottom, black 80%, transparent 100%)",
+                  maskImage: "linear-gradient(to bottom, black 80%, transparent 100%)"
+                }}
+              />
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

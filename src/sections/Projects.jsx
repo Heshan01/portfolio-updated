@@ -124,7 +124,7 @@ export default function ProjectsPage() {
 
         {/* Carousel Container */}
         <div
-          className="relative w-full max-w-6xl h-[180px] sm:h-[400px] lg:h-[450px] flex justify-center items-center mb-2 sm:mb-16"
+          className="relative w-full max-w-6xl h-[180px] sm:h-[320px] lg:h-[400px] flex justify-center items-center mb-2 sm:mb-8"
           style={{ perspective: "1000px" }}
         >
           {projects.map((project, index) => {
@@ -199,7 +199,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* Project Details */}
-        <div className="w-full max-w-4xl h-[280px] lg:h-[220px] relative mt-2 sm:mt-8">
+        <div className="w-full max-w-4xl h-[280px] lg:h-[200px] relative mt-2 sm:mt-4">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -225,7 +225,7 @@ export default function ProjectsPage() {
                 ))}
               </div>
 
-              <div className="flex gap-3 sm:gap-6 mt-4 sm:mt-auto">
+              <div className="flex gap-3 sm:gap-6 mt-4 sm:mt-6">
                 <a
                   href={projects[currentIndex].github}
                   target="_blank"
@@ -250,7 +250,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* View All Projects */}
-        <div className="mt-4 sm:mt-16 z-10">
+        <div className="mt-4 sm:mt-8 z-10">
           <a
             href="https://github.com/Heshan01?tab=repositories"
             target="_blank"

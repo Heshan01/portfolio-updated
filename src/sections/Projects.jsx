@@ -250,7 +250,7 @@ export default function ProjectsPage() {
         </div>
 
         {/* View All Projects */}
-        <div className="mt-4 sm:mt-8 z-10">
+        <div className="mt-4 sm:mt-8 lg:mt-30 z-10">
           <a
             href="https://github.com/Heshan01?tab=repositories"
             target="_blank"
